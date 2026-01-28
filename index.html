@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavju Residence - Spoj luksuza i komfora</title>
+    <link rel="icon" href="img/lavju-residence-logo.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #ecf0f1;
+            --bg-white: #ffffff;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('img/lavju-residence-cover.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .hero .tagline {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            color: #f8f9fa;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            font-weight: 300;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Location Section */
+        .location {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .location-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .location-info p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 400px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-light);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .contact-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.3rem;
+            }
+
+            .location-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Lightbox for gallery */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <img src="img/lavju-residence-logo.jpg" alt="Lavju Residence Logo">
+                <h1>Lavju Residence</h1>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Početna</a></li>
+                <li><a href="#features">Pogodnosti</a></li>
+                <li><a href="#gallery">Galerija</a></li>
+                <li><a href="#location">Lokacija</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Lavju Residence</h1>
+            <p class="tagline">Spoj luksuza i komfora</p>
+            <div class="cta-buttons">
+                <a href="https://www.booking.com/Share-F4EjWP" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Rezervišite odmah
+                </a>
+                <a href="#gallery" class="btn btn-secondary">
+                    <i class="fas fa-images"></i> Pogledajte galeriju
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Naše pogodnosti</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🥐</div>
+                    <h3>Doručak</h3>
+                    <p>Svakog jutra uživajte u našem ukusnom doručku pripremljenom sa pažnjom</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚘</div>
+                    <h3>Parking</h3>
+                    <p>Besplatno parking mesto u sigurnoj podzemnoj garazi za sve naše goste</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☎️</div>
+                    <h3>Recepcija 24h</h3>
+                    <p>Naša recepcija je dostupna 24 sata dnevno za vašu udobnost i sigurnost</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏊🏼‍♀️</div>
+                    <h3>Popust na spa</h3>
+                    <p>20% popusta za Four Elements Spa Center za sve naše goste</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Galerija</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox('img/lavju-residence-img-1.jpg')">
+                    <img src="img/lavju-residence-img-1.jpg" alt="Lavju Residence - Slika 1">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/lavju-residence-img-2.jpg')">
+                    <img src="img/lavju-residence-img-2.jpg" alt="Lavju Residence - Slika 2">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/lavju-residence-img-3.jpg')">
+                    <img src="img/lavju-residence-img-3.jpg" alt="Lavju Residence - Slika 3">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/lavju-residence-img-plan.jpg')">
+                    <img src="img/lavju-residence-img-plan.jpg" alt="Lavju Residence - Tlocrt">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="location">
+        <div class="container">
+            <h2 class="section-title">Lokacija</h2>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>Pronađite nas</h3>
+                    <p>Lavju Residence se nalazi na idealnoj lokaciji koja kombinuje mir i pogodnost. Blizu svih važnih sadržaja, a ipak dovoljno udaljeno da vam pruži potrebni mir i opuštanje.</p>
+                    <a href="https://maps.app.goo.gl/UwbCCBLHVaFScaYz5" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-map-marked-alt"></i> Uputstvo na Google Maps
+                    </a>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2902.510265839065!2d21.9108548!3d43.3245104!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4755b1e5d6b0b21f%3A0x9cb7099a5177efcb!2sPlanet%20Residence!5e0!3m2!1sen!2srs!4v1769629935010!5m2!1sen!2srs" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Kontakt</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <a href="https://www.booking.com/Share-F4EjWP" target="_blank">Booking.com: lavju-residence</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://www.instagram.com/lavju_residence/" target="_blank">Instagram: @lavju_residence</a>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/lavju_residence/" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.booking.com/Share-F4EjWP" target="_blank">
+                    <i class="fas fa-calendar"></i>
+                </a>
+                <a href="https://maps.app.goo.gl/UwbCCBLHVaFScaYz5" target="_blank">
+                    <i class="fas fa-map"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="img/lavju-residence-logo.jpg" alt="Lavju Residence Logo">
+                    <span>Lavju Residence</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Početna</a>
+                    <a href="#features">Pogodnosti</a>
+                    <a href="#gallery">Galerija</a>
+                    <a href="#location">Lokacija</a>
+                    <a href="#contact">Kontakt</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Lavju Residence. Sva prava zadržana. Spoj luksuza i komfora.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--bg-white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Lightbox functionality
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightbox.classList.add('active');
+            lightboxImg.src = imageSrc;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeLightbox();
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and gallery items
+        document.querySelectorAll('.feature-card, .gallery-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
